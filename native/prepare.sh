@@ -3,12 +3,9 @@
 curr_path=`pwd`
 cd `dirname $0`
 
-echo "所有需要root权限的动作在此执行"
 
-if [[ "$(whoami)" != "admin" ]]; then
-    echo "Please run as admin"
-    exit 1
-fi
+CURRENT_USER=`whoami`
+HOME_DIR=`echo ~${CURRENT_USER}`
 
 cd hosts
 
@@ -26,18 +23,22 @@ cat mycat* > mycat
 
 cd ..
 
+
+ssh-keygen -t rsa
+
 cat hosts/hosts | xargs -n 1 bash copy-key.sh
 
-pscp -h hosts/hosts -l root ./binary/jdk-8u121-linux-x64.rpm /root/jdk-8u121-linux-x64.rpm
-pscp -h hosts/hosts -l root ./hosts/all /root/all
+#pscp -h hosts/hosts -l ${CURRENT_USER} ./binary/jdk-8u121-linux-x64.rpm /root/jdk-8u121-linux-x64.rpm
+#pscp -h hosts/hosts -l root ./hosts/all /root/all
 
-pssh -h hosts/hosts -l root -i 'cat /root/all >> /etc/hosts'
-pssh -h hosts/hosts -l root -i 'rpm -i /root/jdk-8u121-linux-x64.rpm'
-pssh -h hosts/hosts -l root -i 'yum install -y tcpdump curl jq telnet'
-pssh -h hosts/hosts -l root -i 'useradd admin && su - admin && mkdir -p /home/admin/.ssh'
+#pssh -h hosts/hosts -l ${CURRENT_USER} -i 'cat /root/all >> /etc/hosts'
+#pssh -h hosts/hosts -l ${CURRENT_USER} -i 'rpm -i /root/jdk-8u121-linux-x64.rpm'
+#pssh -h hosts/hosts -l ${CURRENT_USER} 'yum install -y tcpdump curl jq telnet'
+#pssh -h hosts/hosts -l ${CURRENT_USER} -i 'useradd admin && su - admin && mkdir -p /home/admin/.ssh'
 
-pscp -h hosts/hosts -l root /home/admin/.ssh/id_rsa.pub /home/admin/.ssh/authorized_keys
 
-pssh -h hosts/hosts -l admin -i 'mkdir -p /home/admin/omega-framework/lib'
+#pscp -h hosts/hosts -l ${CURRENT_USER} /home/admin/.ssh/id_rsa.pub /home/admin/.ssh/authorized_keys
+
+pssh -h hosts/hosts -l ${CURRENT_USER} -i "mkdir -p ${HOME_DIR}/omega-framework/lib"
 
 cd $curr_path
