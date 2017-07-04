@@ -14,6 +14,7 @@ EUREKA1=`cat hosts/eureak1`
 EUREKA2=`cat hosts/eureak2`
 EUREKA3=`cat hosts/eureak3`
 
+pssh -h hosts/eureka -l  ${CURRENT_USER}  -i "mkdir -p  ${HOME_DIR}/omega-framework/lib/"
 
 pscp -h hosts/eureka -l ${CURRENT_USER}   ~/omega-framework-assembly-0.1/lib/omega-framework-eureka*.jar  \
                                             ${HOME_DIR}/omega-framework/lib/

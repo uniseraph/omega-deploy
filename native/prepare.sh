@@ -11,6 +11,8 @@ cd
 
 HOME_DIR=`pwd`
 
+cd $curr_path
+
 cd hosts
 
 awk '{print $1}' all > hosts
