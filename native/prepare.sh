@@ -5,7 +5,11 @@ cd `dirname $0`
 
 
 CURRENT_USER=`whoami`
-HOME_DIR=`echo ~${CURRENT_USER}`
+
+
+cd
+
+HOME_DIR=`pwd`
 
 cd hosts
 

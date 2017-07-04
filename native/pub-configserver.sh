@@ -6,7 +6,9 @@ cd `dirname $0`
 
 
 CURRENT_USER=`whoami`
-HOME_DIR=`echo ~${CURRENT_USER}`
+cd
+HOME_DIR=`pwd`
+
 
 #CONF1=`cat hosts/configserver1`
 #CONF2=`cat hosts/configserver2`

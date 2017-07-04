@@ -5,7 +5,9 @@ cd `dirname $0`
 
 
 CURRENT_USER=`whoami`
-HOME_DIR=`echo ~${CURRENT_USER}`
+
+cd
+HOME_DIR=`pwd`
 
 EUREKA1=`cat hosts/eureak1`
 EUREKA2=`cat hosts/eureak2`
