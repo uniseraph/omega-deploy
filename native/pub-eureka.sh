@@ -19,9 +19,8 @@ pssh -h hosts/eureka -l  ${CURRENT_USER}  -i "mkdir -p  ${HOME_DIR}/omega-framew
 pscp -h hosts/eureka -l ${CURRENT_USER}   ~/omega-framework-assembly-0.1/lib/omega-framework-eureka*.jar  \
                                             ${HOME_DIR}/omega-framework/lib/
 
-pssh -h hosts/eureka1 -l ${CURRENT_USER} -i " curl --connect-timeout 2 -fsSL -X POST http://${EUREKA1}:8080/shutdown ; \
-                               sleep 5 && \
-                               cd ${HOME_DIR}/omega-framework && \
+curl  -X POST http://${EUREKA1}:8080/shutdown && sleep 1
+pssh -h hosts/eureka1 -l ${CURRENT_USER} -i " cd ${HOME_DIR}/omega-framework && \
                                java -Djava.security.egd=file:/dev/./urandom -jar lib/omega-framework-eureka-0.1.jar \
                                --logging.path=${HOME_DIR}/logs \
                                --server.port=8080 --spring.profiles.active=eureka1 \
@@ -38,9 +37,8 @@ pssh -h hosts/eureka1 -l ${CURRENT_USER} -i " curl --connect-timeout 2 -fsSL -X 
     sleep 1
   done
 
-pssh -h hosts/eureka2 -l ${CURRENT_USER} -i " curl --connect-timeout 2 -fsSL -X POST http://localhost:8080/shutdown &&  \
-                                sleep 5 && \
-                               cd ${HOME_DIR}/omega-framework && \
+curl  -X POST http://${EUREKA2}:8080/shutdown && sleep 1
+pssh -h hosts/eureka2 -l ${CURRENT_USER} -i " cd ${HOME_DIR}/omega-framework && \
                                java -Djava.security.egd=file:/dev/./urandom -jar lib/omega-framework-eureka-0.1.jar \
                                --logging.path=${HOME_DIR}/logs \
                                --server.port=8080 --spring.profiles.active=eureka2 \
@@ -57,9 +55,8 @@ pssh -h hosts/eureka2 -l ${CURRENT_USER} -i " curl --connect-timeout 2 -fsSL -X 
     sleep 1
   done
 
-pssh -h hosts/eureka3 -l ${CURRENT_USER} -i " curl --connect-timeout 2 -fsSL -X POST http://localhost:8080/shutdown &&  \
-                               sleep 5 && \
-                               cd ${HOME_DIR}/omega-framework && \
+curl  -X POST http://${EUREKA3}:8080/shutdown && sleep 1
+pssh -h hosts/eureka3 -l ${CURRENT_USER} -i " cd ${HOME_DIR}/omega-framework && \
                                java -Djava.security.egd=file:/dev/./urandom -jar lib/omega-framework-eureka-0.1.jar \
                                --logging.path=${HOME_DIR}/logs \
                                --server.port=8080 --spring.profiles.active=eureka3 \

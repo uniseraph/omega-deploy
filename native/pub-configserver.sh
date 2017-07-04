@@ -21,14 +21,19 @@ EUREKA3=`cat hosts/eureka3`
 
 RABBITMQ=`cat hosts/rabbitmq`
 
-jar uvf ~/omega-framework-assembly-0.1/lib/omega-framework-configserver-0.1.jar ~/config-repo
 
-#jar uvf ../../lib/omega-framework-configserver-0.1.jar  config-repo
+rm -rf omega-framework-configserver-0.1.jar
+rm -rf config-repo
+
+ln -s ~/config-repo config-repo
+cp ~/omega-framework-assembly-0.1/lib/omega-framework-configserver-0.1.jar .
+
+jar uvf omega-framework-configserver-0.1.jar config-repo
 
 pssh -h hosts/configserver -l ${CURRENT_USER} -i "mkdir -p ${HOME_DIR}/omega-framework/lib"
 
 
-pscp -h hosts/configserver  -l  ${CURRENT_USER}  ~/omega-framework-assembly-0.1/lib/omega-framework-configserver-0.1.jar \
+pscp -h hosts/configserver  -l  ${CURRENT_USER}  omega-framework-configserver-0.1.jar \
                                 ${HOME_DIR}/omega-framework/lib/
 
 pssh -h hosts/configserver -l ${CURRENT_USER} -i " curl --connect-timeout 2 -fsSL -X POST http://127.0.0.1:8080/shutdown ;\
@@ -39,5 +44,8 @@ pssh -h hosts/configserver -l ${CURRENT_USER} -i " curl --connect-timeout 2 -fsS
                                --server.port=8080  \
                                --spring.rabbitmq.host=${RABBITMQ} \
                                --eureka.client.serviceUrl.defaultZone=http://${EUREKA1}:8080/eureka,http://${EUREKA2}:8080/eureka,http://${EUREKA3}:8080/eureka "
+
+pssh -h hosts/configserver1 -l ${CURRENT_USER} -i ' curl -fsSL -X POST http://127.0.0.1:8080/bus/refresh '
+
 
 cd $curr_path
