@@ -28,7 +28,7 @@ rm -rf config-repo
 ln -s ~/config-repo config-repo
 cp ~/omega-framework-assembly-0.1/lib/omega-framework-configserver-0.1.jar .
 
-jar uvf omega-framework-configserver-0.1.jar config-repo
+jar uvf omega-framework-configserver-0.1.jar -C config-repo  .
 
 pssh -h hosts/configserver -l ${CURRENT_USER} -i "mkdir -p ${HOME_DIR}/omega-framework/lib"
 

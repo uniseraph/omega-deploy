@@ -19,7 +19,7 @@ EUREKA2=`cat hosts/eureka2`
 EUREKA3=`cat hosts/eureka3`
 
 
-pssh -h hosts/$SERVICE_NAME -l ${CURRENT_USER} -i 'mkdir -p /home/admin/services/lib'
+pssh -h hosts/$SERVICE_NAME -l ${CURRENT_USER} -i "mkdir -p ${HOME_DIR}/services/lib"
 pscp -h hosts/$SERVICE_NAME  -l  ${CURRENT_USER}  ./lib-repo/${SERVICE_NAME}-${VERSION}.jar /home/admin/services/lib/
 
 
