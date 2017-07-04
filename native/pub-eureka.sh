@@ -8,6 +8,7 @@ CURRENT_USER=`whoami`
 
 cd
 HOME_DIR=`pwd`
+cd $curr_path
 
 EUREKA1=`cat hosts/eureak1`
 EUREKA2=`cat hosts/eureak2`

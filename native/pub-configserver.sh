@@ -8,6 +8,7 @@ cd `dirname $0`
 CURRENT_USER=`whoami`
 cd
 HOME_DIR=`pwd`
+cd $curr_path
 
 
 #CONF1=`cat hosts/configserver1`
