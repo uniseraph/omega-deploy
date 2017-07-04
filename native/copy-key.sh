@@ -4,7 +4,7 @@ curr_path=`pwd`
 cd `dirname $0`
 
 
-CURRENT_USER=`pwd`
+CURRENT_USER=`whoami`
 
 cd
 
