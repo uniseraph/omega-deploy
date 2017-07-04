@@ -21,7 +21,8 @@ EUREKA3=`cat hosts/eureak3`
 
 RABBITMQ=`cat hosts/rabbitmq`
 
-jar uvf ~/omega-framework-assembly-0.1/lib/omega-framework-configserver-0.1.jar config-repo
+jar uvf ~/omega-framework-assembly-0.1/lib/omega-framework-configserver-0.1.jar ~/config-repo
+
 #jar uvf ../../lib/omega-framework-configserver-0.1.jar  config-repo
 
 pssh -h hosts/configserver -l ${CURRENT_USER} -i "mkdir -p ${HOME_DIR}/omega-framework/lib"
