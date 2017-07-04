@@ -13,9 +13,9 @@ HOME_DIR=`pwd`
 cd $curr_path
 
 
-EUREKA1=`cat hosts/eureak1`
-EUREKA2=`cat hosts/eureak2`
-EUREKA3=`cat hosts/eureak3`
+EUREKA1=`cat hosts/eureka1`
+EUREKA2=`cat hosts/eureka2`
+EUREKA3=`cat hosts/eureka3`
 
 
 pscp -h hosts/$SERVICE_NAME  -l  ${CURRENT_USER}  ~/omega-framework-assembly-0.1/lib/${SERVICE_NAME}-${VERSION}.jar ${HOME_DIR}/omega-framework/lib/

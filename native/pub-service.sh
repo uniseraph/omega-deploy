@@ -14,9 +14,9 @@ HOME_DIR=`pwd`
 cd $curr_path
 
 
-EUREKA1=`cat hosts/eureak1`
-EUREKA2=`cat hosts/eureak2`
-EUREKA3=`cat hosts/eureak3`
+EUREKA1=`cat hosts/eureka1`
+EUREKA2=`cat hosts/eureka2`
+EUREKA3=`cat hosts/eureka3`
 
 
 pssh -h hosts/$SERVICE_NAME -l ${CURRENT_USER} -i 'mkdir -p /home/admin/services/lib'
